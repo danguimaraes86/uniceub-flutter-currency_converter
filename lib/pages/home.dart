@@ -1,4 +1,4 @@
-import 'package:currency_converter/models/currency.dart';
+import 'package:currency_converter/components/currency_selector.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -15,46 +15,30 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: CurrencySelect(),
-    );
-  }
-}
-
-class CurrencySelect extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return CurrencySelectState();
-  }
-}
-
-class CurrencySelectState extends State<CurrencySelect> {
-  String moedaOrigem = 'hint';
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
         children: [
-          Text('Moeda de Origem'),
-          DropdownButton<String>(
-            hint: Text('Selecione uma moeda'),
-            icon: Icon(Icons.monetization_on),
-            value: moedaOrigem,
-            onChanged: (newValue) {
-              print(newValue);
-              setState(() {
-                moedaOrigem = newValue!;
-              });
-            },
-            items: currencies.map((e) {
-              return DropdownMenuItem<String>(
-                value: e.currencySymbol,
-                child: Text(e.currencyName),
-              );
-            }).toList(),
+          CurrencySelector(
+            label: 'Moeda de Origem',
           ),
+          CurrencySelector(
+            label: 'Moeda de Destino',
+          ),
+          const Divider(
+            height: 16,
+            thickness: 4,
+            indent: 16,
+            endIndent: 16,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                label: Text('Valor'),
+                hintText: 'Digite o valor para conversão',
+              ),
+              keyboardType: TextInputType.number,
+            ),
+          )
         ],
       ),
     );
