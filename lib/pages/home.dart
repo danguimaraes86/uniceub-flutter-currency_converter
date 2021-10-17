@@ -1,44 +1,27 @@
-import 'package:currency_converter/components/currency_selector.dart';
+import 'package:currency_converter/components/seletor_destino.dart';
+import 'package:currency_converter/components/seletor_origem.dart';
+import 'package:currency_converter/components/value_converter.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  final String title;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Conversor de Moedas'),
       ),
-      body: Column(
+      body: ListView(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CurrencySelector(
-            label: 'Moeda de Origem',
-          ),
-          CurrencySelector(
-            label: 'Moeda de Destino',
-          ),
+          SeletorOrigem(),
+          SeletorDestino(),
           const Divider(
             height: 16,
             thickness: 4,
             indent: 16,
             endIndent: 16,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                label: Text('Valor'),
-                hintText: 'Digite o valor para conversão',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-          )
+          ValueConverter(),
         ],
       ),
     );
