@@ -2,17 +2,28 @@ import 'package:currency_converter/models/converter_data.dart';
 import 'package:currency_converter/service/fetch_currency.dart';
 import 'package:flutter/material.dart';
 
-class ValueConverter extends StatelessWidget {
+class ValueConverter extends StatefulWidget {
+  @override
+  State<ValueConverter> createState() => _ValueConverterState();
+}
+
+class _ValueConverterState extends State<ValueConverter> {
+  bool showResultCard = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         InputValueConverter(),
-        ResultValueConverter(),
+        ResultValueConverter(showResultCard),
         ElevatedButton(
           onPressed: () async {
             converterData.resultado = await FetchCurrency();
-            print(converterData.resultado);
+            if (converterData.resultado.isNotEmpty) {
+              setState(() {
+                showResultCard = true;
+              });
+            }
           },
           child: Text('Converter'),
         ),
@@ -34,7 +45,11 @@ class InputValueConverterState extends State<InputValueConverter> {
       child: TextField(
         onChanged: (valor) {
           setState(() {
-            converterData.valor = double.tryParse(valor)!;
+            if (valor.isNotEmpty) {
+              converterData.valor = double.parse(valor);
+            } else {
+              converterData.valor = 0;
+            }
           });
         },
         decoration: InputDecoration(
@@ -48,6 +63,9 @@ class InputValueConverterState extends State<InputValueConverter> {
 }
 
 class ResultValueConverter extends StatelessWidget {
+  bool showResult;
+  ResultValueConverter(this.showResult);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,7 +73,9 @@ class ResultValueConverter extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: Icon(Icons.monetization_on_outlined),
-          title: Text('O valor corresponde a ${converterData.resultado}'),
+          title: Text(showResult
+              ? 'O valor corresponde a ${converterData.resultado}'
+              : 'Aguardando valores para conversão'),
         ),
       ),
     );
