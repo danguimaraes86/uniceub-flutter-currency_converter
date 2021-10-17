@@ -1,4 +1,5 @@
 import 'package:currency_converter/models/converter_data.dart';
+import 'package:currency_converter/service/fetch_currency.dart';
 import 'package:flutter/material.dart';
 
 class ValueConverter extends StatelessWidget {
@@ -9,10 +10,9 @@ class ValueConverter extends StatelessWidget {
         InputValueConverter(),
         ResultValueConverter(),
         ElevatedButton(
-          onPressed: () {
-            print(converterData.valor);
-            print(converterData.moedaOrigem);
-            print(converterData.moedaDestino);
+          onPressed: () async {
+            converterData.resultado = await FetchCurrency();
+            print(converterData.resultado);
           },
           child: Text('Converter'),
         ),
@@ -55,7 +55,7 @@ class ResultValueConverter extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: Icon(Icons.monetization_on_outlined),
-          title: Text('O valor corresponde a 1000'),
+          title: Text('O valor corresponde a ${converterData.resultado}'),
         ),
       ),
     );
