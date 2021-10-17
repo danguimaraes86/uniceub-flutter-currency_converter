@@ -1,11 +1,8 @@
+import 'package:currency_converter/models/converter_data.dart';
 import 'package:currency_converter/models/currency.dart';
 import 'package:flutter/material.dart';
 
-class CurrencySelector extends StatelessWidget {
-  CurrencySelector({required this.label});
-
-  final String label;
-
+class SeletorOrigem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,7 +11,7 @@ class CurrencySelector extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            label,
+            'Moeda de Origem',
             style: TextStyle(
               fontSize: 16,
             ),
@@ -34,18 +31,18 @@ class DropdownCurrency extends StatefulWidget {
 }
 
 class DropdownCurrencyState extends State<DropdownCurrency> {
-  String moedaOrigem = 'hint';
+  String seletctedItem = 'hint';
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       hint: Text('Selecione uma moeda'),
       icon: Icon(Icons.monetization_on),
-      value: moedaOrigem,
+      value: seletctedItem,
       onChanged: (newValue) {
-        print(newValue);
         setState(() {
-          moedaOrigem = newValue!;
+          converterData.moedaOrigem = newValue!;
+          seletctedItem = newValue;
         });
       },
       items: currencies.map((e) {
