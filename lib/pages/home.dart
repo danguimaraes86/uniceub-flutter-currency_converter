@@ -4,18 +4,20 @@ import 'package:currency_converter/components/value_converter.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Conversor de Moedas'),
+        title: const Text('Conversor de Moedas'),
       ),
       body: ListView(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           SeletorOrigem(),
           SeletorDestino(),
-          const Divider(
+          Divider(
             height: 16,
             thickness: 4,
             indent: 16,

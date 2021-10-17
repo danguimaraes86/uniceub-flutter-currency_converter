@@ -3,6 +3,8 @@ import 'package:currency_converter/service/fetch_currency.dart';
 import 'package:flutter/material.dart';
 
 class ValueConverter extends StatefulWidget {
+  const ValueConverter({Key? key}) : super(key: key);
+
   @override
   State<ValueConverter> createState() => _ValueConverterState();
 }
@@ -14,18 +16,18 @@ class _ValueConverterState extends State<ValueConverter> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        InputValueConverter(),
+        const InputValueConverter(),
         ResultValueConverter(showResultCard),
         ElevatedButton(
           onPressed: () async {
-            converterData.resultado = await FetchCurrency();
+            converterData.resultado = await fetchCurrency();
             if (converterData.resultado.isNotEmpty) {
               setState(() {
                 showResultCard = true;
               });
             }
           },
-          child: Text('Converter'),
+          child: const Text('Converter'),
         ),
       ],
     );
@@ -33,6 +35,8 @@ class _ValueConverterState extends State<ValueConverter> {
 }
 
 class InputValueConverter extends StatefulWidget {
+  const InputValueConverter({Key? key}) : super(key: key);
+
   @override
   State<InputValueConverter> createState() => InputValueConverterState();
 }
@@ -41,7 +45,7 @@ class InputValueConverterState extends State<InputValueConverter> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: TextField(
         onChanged: (valor) {
           setState(() {
@@ -52,7 +56,7 @@ class InputValueConverterState extends State<InputValueConverter> {
             }
           });
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           label: Text('Valor'),
           hintText: 'Digite o valor para conversão. Ex. 20.5',
         ),
@@ -63,16 +67,16 @@ class InputValueConverterState extends State<InputValueConverter> {
 }
 
 class ResultValueConverter extends StatelessWidget {
-  bool showResult;
-  ResultValueConverter(this.showResult);
+  final bool showResult;
+  const ResultValueConverter(this.showResult, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Card(
         child: ListTile(
-          leading: Icon(Icons.monetization_on_outlined),
+          leading: const Icon(Icons.monetization_on_outlined),
           title: Text(showResult
               ? 'O valor corresponde a ${converterData.resultado}'
               : 'Aguardando valores para conversão'),

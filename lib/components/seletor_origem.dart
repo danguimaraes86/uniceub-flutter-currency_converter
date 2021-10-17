@@ -3,13 +3,15 @@ import 'package:currency_converter/models/currency.dart';
 import 'package:flutter/material.dart';
 
 class SeletorOrigem extends StatelessWidget {
+  const SeletorOrigem({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           Text(
             'Moeda de Origem',
             style: TextStyle(
@@ -24,6 +26,8 @@ class SeletorOrigem extends StatelessWidget {
 }
 
 class DropdownCurrency extends StatefulWidget {
+  const DropdownCurrency({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return DropdownCurrencyState();
@@ -36,8 +40,8 @@ class DropdownCurrencyState extends State<DropdownCurrency> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      hint: Text('Selecione uma moeda'),
-      icon: Icon(Icons.monetization_on),
+      hint: const Text('Selecione uma moeda'),
+      icon: const Icon(Icons.monetization_on),
       value: seletctedItem,
       onChanged: (newValue) {
         setState(() {
