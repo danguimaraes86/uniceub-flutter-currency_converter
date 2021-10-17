@@ -10,13 +10,8 @@ class CurrencyConverter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Currency Converter',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(
-        title: 'Currency Converter',
-      ),
+      title: 'Conversor de Moedas',
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
